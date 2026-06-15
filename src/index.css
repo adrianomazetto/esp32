@@ -1,0 +1,986 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Cores Principais */
+  --bg-ice-white: #F4F6F9;
+  --text-lead-dark: #2E3A48;
+  --text-lead-light: #5A6A7D;
+  --primary-red: #E53E3E;
+  --primary-red-hover: #C53030;
+  --neutral-black: #1A202C;
+  --neutral-black-hover: #000000;
+  --gray-light: #EBF0F3;
+  --gray-medium: #A0AEC0;
+  --white: #FFFFFF;
+
+  /* Fontes */
+  --font-heading: 'Outfit', 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  /* Efeitos e Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
+  --transition-smooth: all 0.2s ease-in-out;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-ice-white);
+  color: var(--text-lead-dark);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 480px; /* Limite padrão para simular tela de celular em telas maiores */
+  background-color: var(--bg-ice-white);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Modo Paisagem para Telas Específicas */
+#root.landscape {
+  max-width: 960px;
+}
+
+/* Cabeçalho do App */
+.app-header {
+  background-color: var(--bg-ice-white);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-lead-dark);
+  letter-spacing: -0.5px;
+}
+
+.logo-plus {
+  color: var(--primary-red);
+  font-weight: 800;
+  font-size: 22px;
+}
+
+/* Status de Conexão */
+.connection-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.connection-badge.connected {
+  background-color: rgba(229, 62, 62, 0.08); /* Tom de vermelho suave */
+  color: var(--primary-red);
+  border: 1px solid rgba(229, 62, 62, 0.2);
+}
+
+.connection-badge.disconnected {
+  background-color: var(--gray-light);
+  color: var(--text-lead-light);
+  border: 1px solid transparent;
+}
+
+/* Container Principal */
+.app-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Títulos */
+.screen-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-lead-dark);
+  margin-bottom: 8px;
+}
+
+.screen-subtitle {
+  font-size: 14px;
+  color: var(--text-lead-light);
+  margin-bottom: 24px;
+}
+
+/* Botão de Voltar */
+.back-button {
+  background: none;
+  border: none;
+  color: var(--text-lead-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: fit-content;
+  transition: var(--transition-smooth);
+}
+
+.back-button:hover {
+  color: var(--primary-red);
+  transform: translateX(-2px);
+}
+
+/* Grade de Menu (Dashboard) */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.menu-card {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(229, 62, 62, 0.1);
+}
+
+.menu-card:active {
+  transform: translateY(0);
+}
+
+.menu-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neutral-black);
+  transition: var(--transition-smooth);
+}
+
+.menu-card:hover .menu-card-icon {
+  color: var(--primary-red);
+  transform: scale(1.1);
+}
+
+.menu-card-title {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-lead-dark);
+}
+
+/* Tela de Controle LED (02.jpeg) */
+.led-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.power-button-outer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  border: 8px solid var(--gray-light);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.power-button-outer:active {
+  transform: scale(0.95);
+}
+
+.power-button-outer.active {
+  border-color: rgba(229, 62, 62, 0.3);
+  box-shadow: 0 0 30px rgba(229, 62, 62, 0.2);
+}
+
+.power-button-inner {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: var(--bg-ice-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-lead-light);
+  transition: var(--transition-smooth);
+}
+
+.power-button-outer.active .power-button-inner {
+  background-color: var(--primary-red);
+  color: var(--white);
+}
+
+.power-status-text {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-lead-dark);
+}
+
+/* Tela de Controle RGB (03.jpeg) */
+.rgb-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.color-picker-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-preview-box {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  box-shadow: var(--shadow-md);
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.rgb-values-display {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.rgb-badge {
+  background-color: var(--white);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.rgb-badge span {
+  color: var(--primary-red);
+}
+
+/* Tela de Interruptores (Switches - 05.jpeg) */
+.switches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.switch-item {
+  background-color: var(--white);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  transition: var(--transition-smooth);
+}
+
+.switch-item:hover {
+  border-color: rgba(229, 62, 62, 0.05);
+}
+
+.switch-label {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-lead-dark);
+}
+
+/* Custom Switch Toggle button */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-light);
+  transition: .3s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--white);
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--primary-red);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Tela de Controle de Carro (04.jpeg) */
+.car-landscape-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 100px);
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.direction-dpad-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dpad-btn {
+  width: 90px;
+  height: 80px;
+  background-color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-lead-dark);
+  transition: var(--transition-smooth);
+}
+
+.dpad-btn:active {
+  transform: scale(0.92);
+  background-color: var(--primary-red);
+  color: var(--white);
+}
+
+.car-center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.speed-slider-container {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.speed-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--gray-light);
+  outline: none;
+  transition: opacity .2s;
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-red);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.car-icon-display {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neutral-black);
+}
+
+.car-action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.car-action-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  border: none;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-lead-dark);
+  transition: var(--transition-smooth);
+}
+
+.car-action-btn.active {
+  background-color: var(--primary-red);
+  color: var(--white);
+}
+
+.car-action-btn:active {
+  transform: scale(0.9);
+}
+
+.direction-dpad-right {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+/* Tela de Gamepad (07.jpeg) */
+.gamepad-landscape-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(100vh - 100px);
+  padding: 0 40px;
+}
+
+.gamepad-dpad {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.gamepad-btn {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  background-color: var(--white);
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text-lead-dark);
+  transition: var(--transition-smooth);
+}
+
+.gamepad-btn:active {
+  background-color: var(--primary-red);
+  color: var(--white);
+  transform: scale(0.92);
+}
+
+.gamepad-btn.up { top: 0; left: 63px; }
+.gamepad-btn.down { bottom: 0; left: 63px; }
+.gamepad-btn.left { left: 0; top: 63px; }
+.gamepad-btn.right { right: 0; top: 63px; }
+.gamepad-btn.center-hub {
+  left: 63px;
+  top: 63px;
+  background-color: var(--gray-light);
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.gamepad-center-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gamepad-sys-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  border: 1px solid var(--gray-light);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.gamepad-sys-btn:active {
+  transform: scale(0.95);
+  background-color: var(--primary-red);
+  color: var(--white);
+}
+
+.gamepad-actions {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.gamepad-act-btn {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  background-color: var(--white);
+  border: 4px solid var(--gray-light);
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-lead-dark);
+  transition: var(--transition-smooth);
+}
+
+.gamepad-act-btn:active {
+  background-color: var(--primary-red);
+  color: var(--white);
+  border-color: rgba(229, 62, 62, 0.2);
+  transform: scale(0.92);
+}
+
+.gamepad-act-btn.triangle { top: 0; left: 63px; }
+.gamepad-act-btn.cross { bottom: 0; left: 63px; }
+.gamepad-act-btn.square { left: 0; top: 63px; }
+.gamepad-act-btn.circle { right: 0; top: 63px; }
+
+/* Tela de Terminal (08.jpeg) */
+.terminal-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.terminal-console {
+  flex: 1;
+  background-color: var(--neutral-black);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  font-family: monospace;
+  font-size: 14px;
+  color: var(--gray-light);
+  overflow-y: auto;
+  min-height: 250px;
+  max-height: 400px;
+  box-shadow: inset var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.terminal-line {
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.terminal-line.sent {
+  color: var(--primary-red);
+}
+
+.terminal-line.received {
+  color: #48BB78; /* Verde */
+}
+
+.terminal-line.info {
+  color: var(--gray-medium);
+  font-style: italic;
+}
+
+.terminal-input-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-input {
+  flex: 1;
+  background-color: var(--white);
+  border: 1px solid var(--gray-light);
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: var(--text-lead-dark);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.terminal-input:focus {
+  border-color: var(--primary-red);
+}
+
+.terminal-send-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--neutral-black);
+  color: var(--white);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.terminal-send-btn:hover {
+  background-color: var(--primary-red);
+}
+
+.terminal-send-btn:active {
+  transform: scale(0.92);
+}
+
+/* Tela de Voz */
+.voice-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mic-button-outer {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.mic-button-outer.listening {
+  animation: pulse-red 1.5s infinite;
+}
+
+.mic-button-inner {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--gray-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-lead-dark);
+  transition: var(--transition-smooth);
+}
+
+.mic-button-outer.listening .mic-button-inner {
+  background-color: var(--primary-red);
+  color: var(--white);
+}
+
+.voice-transcript-box {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  width: 100%;
+  min-height: 100px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  font-size: 16px;
+  color: var(--text-lead-dark);
+}
+
+.voice-instruction {
+  font-size: 14px;
+  color: var(--text-lead-light);
+}
+
+/* Tela de Teclado 4x4 (09.jpeg) */
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.keypad-btn {
+  aspect-ratio: 1;
+  background-color: #3182CE; /* Azul padrão */
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.keypad-btn.action-key {
+  background-color: var(--primary-red); /* Vermelho */
+}
+
+.keypad-btn:active {
+  transform: scale(0.92);
+  filter: brightness(0.85);
+}
+
+/* Tela de Exemplos de Código (06.jpeg) */
+.code-viewer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.copy-btn {
+  background: none;
+  border: 1px solid var(--gray-medium);
+  color: var(--text-lead-dark);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+}
+
+.copy-btn:hover {
+  background-color: var(--gray-light);
+  border-color: var(--primary-red);
+  color: var(--primary-red);
+}
+
+.code-block {
+  background-color: #1A202C;
+  color: #E2E8F0;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-x: auto;
+  max-height: 400px;
+  white-space: pre;
+}
+
+/* Tela de Conexão Bluetooth */
+.device-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.device-item {
+  background-color: var(--white);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.device-item:hover {
+  border-color: rgba(229, 62, 62, 0.2);
+  transform: translateY(-2px);
+}
+
+.device-name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.device-rssi {
+  font-size: 12px;
+  color: var(--text-lead-light);
+}
+
+.scan-button {
+  background-color: var(--neutral-black);
+  color: var(--white);
+  border: none;
+  padding: 14px 20px;
+  border-radius: 30px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  width: 100%;
+  margin-top: 24px;
+}
+
+.scan-button:hover {
+  background-color: var(--primary-red);
+}
+
+.scan-button:active {
+  transform: scale(0.98);
+}
+
+.scan-button.scanning {
+  background-color: var(--gray-medium);
+  cursor: not-allowed;
+}
+
+/* Modais e Status Gerais */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Animações */
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(229, 62, 62, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
+  }
+}

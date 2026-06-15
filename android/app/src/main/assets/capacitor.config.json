@@ -1,0 +1,6 @@
+{
+	"appId": "com.senai.esp32controller",
+	"appName": "SENAI + ESP32",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
