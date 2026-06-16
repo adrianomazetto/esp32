@@ -58,7 +58,36 @@ body {
 
 /* Modo Paisagem para Telas Específicas */
 #root.landscape {
-  max-width: 960px;
+  max-width: 100%;
+}
+
+#root.landscape .app-header {
+  display: none !important; /* Esconde o cabeçalho no modo paisagem */
+}
+
+#root.landscape .app-container {
+  padding: 10px 16px;
+  height: 100vh;
+  height: 100svh;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#root.landscape .back-button {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+#root.landscape .car-landscape-container {
+  height: calc(100vh - 50px);
+  height: calc(100svh - 50px);
+  padding: 10px 0;
+}
+
+#root.landscape .gamepad-landscape-container {
+  height: calc(100vh - 50px);
+  height: calc(100svh - 50px);
+  padding: 0;
 }
 
 /* Cabeçalho do App */
@@ -881,6 +910,9 @@ input:checked + .toggle-slider:before {
   flex-direction: column;
   gap: 10px;
   margin-top: 16px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .device-item {
@@ -983,4 +1015,56 @@ input:checked + .toggle-slider:before {
   100% {
     box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
   }
+}
+
+/* Responsividade Geral para telas horizontais pequenas */
+@media (max-height: 400px) {
+  #root.landscape .app-container {
+    padding: 6px 12px;
+  }
+  #root.landscape .back-button {
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  #root.landscape .car-landscape-container {
+    gap: 12px;
+  }
+  #root.landscape .dpad-btn {
+    width: 70px;
+    height: 60px;
+  }
+  #root.landscape .car-icon-display {
+    width: 60px;
+    height: 60px;
+  }
+  #root.landscape .car-icon-display svg {
+    width: 32px;
+    height: 32px;
+  }
+  #root.landscape .speed-slider-container {
+    max-width: 150px;
+  }
+  #root.landscape .gamepad-landscape-container {
+    padding: 0 10px;
+  }
+  #root.landscape .gamepad-dpad,
+  #root.landscape .gamepad-actions {
+    width: 140px;
+    height: 140px;
+  }
+  #root.landscape .gamepad-btn,
+  #root.landscape .gamepad-act-btn {
+    width: 44px;
+    height: 44px;
+  }
+  #root.landscape .gamepad-btn.up { top: 0; left: 48px; }
+  #root.landscape .gamepad-btn.down { bottom: 0; left: 48px; }
+  #root.landscape .gamepad-btn.left { left: 0; top: 48px; }
+  #root.landscape .gamepad-btn.right { right: 0; top: 48px; }
+  #root.landscape .gamepad-btn.center-hub { left: 48px; top: 48px; width: 44px; height: 44px; }
+  
+  #root.landscape .gamepad-act-btn.triangle { top: 0; left: 48px; }
+  #root.landscape .gamepad-act-btn.cross { bottom: 0; left: 48px; }
+  #root.landscape .gamepad-act-btn.square { left: 0; top: 48px; }
+  #root.landscape .gamepad-act-btn.circle { right: 0; top: 48px; }
 }

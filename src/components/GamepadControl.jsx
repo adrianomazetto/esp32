@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 import bleManager from './BleManager';
 
 const GamepadControl = ({ onBack }) => {
@@ -8,8 +9,28 @@ const GamepadControl = ({ onBack }) => {
     const root = document.getElementById('root');
     if (root) root.classList.add('landscape');
     
+    // Tenta rotacionar fisicamente a tela para paisagem
+    const lockLandscape = async () => {
+      try {
+        await ScreenOrientation.lock({ orientation: 'landscape' });
+      } catch (err) {
+        console.warn('Rotação nativa para landscape não disponível:', err);
+      }
+    };
+    lockLandscape();
+    
     return () => {
       if (root) root.classList.remove('landscape');
+      
+      // Restaura a orientação para retrato ao sair
+      const lockPortrait = async () => {
+        try {
+          await ScreenOrientation.lock({ orientation: 'portrait' });
+        } catch (err) {
+          console.warn('Rotação nativa para portrait não disponível:', err);
+        }
+      };
+      lockPortrait();
     };
   }, []);
 
