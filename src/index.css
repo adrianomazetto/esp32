@@ -487,6 +487,7 @@ input:checked + .toggle-slider:before {
 .speed-slider {
   width: 100%;
   -webkit-appearance: none;
+  appearance: none;
   height: 8px;
   border-radius: 4px;
   background: var(--gray-light);
